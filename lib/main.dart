@@ -13,15 +13,15 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Material App Bar'),
         ),
-        body: FutureBuilder<Blog>(
-          future: getBlog(),
+        body: FutureBuilder<List<Blog>>(
+          future: getBlogPosts(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Card(
-                child: Text("${snapshot.data.id}"),
+                child: Text("${snapshot.data.first.id}"),
               );
             } else if (snapshot.hasError) {
-              return Text('Error');
+              return Text(snapshot.error);
             }
             return Center(child: CircularProgressIndicator());
           },
