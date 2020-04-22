@@ -4,12 +4,12 @@ import 'package:wallpro/data/api_link.dart';
 import 'package:wallpro/models/blog.dart';
 import 'package:http/http.dart' as http;
 
-Future<Blog> getBlog() async {
+Future<List<Blog>> getBlogPosts() async {
   final response = await http.get(url);
   if (response.statusCode == 200) {
-    String jsonBlog = json.decode(response.body);
-    return Blog.fromJson(jsonBlog);
+    List<dynamic> jsonBlog = json.decode(response.body);
+    return jsonBlog.map((blog)=> Blog.fromJson(jsonBlog)).toList();
   } else {
-    throw Exception();
+    throw Exception('Kei Exception Aayo and ma FutureBuilder le teslai catch gare');
   }
 }
